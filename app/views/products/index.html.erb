@@ -1,0 +1,27 @@
+<h1>商品一覧</h1>
+
+<%= link_to 'カートを見る', cart_path %>
+<%= link_to '新規商品', new_product_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>価格</th>
+      <th>説明</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= number_to_currency(product.price, unit: '¥') %></td>
+        <td><%= product.description %></td>
+        <td>
+          <%= button_to 'カートに追加', cart_items_path(product_id: product.id), method: :post %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
